@@ -2,12 +2,12 @@ import React from "react";
 
 function Logout() {
   return (
-    <main class="wrapper">
-      <div class="container">
-        <h1 class="title login">로그아웃 하실래요?</h1>
+    <main className="wrapper">
+      <div className="container">
+        <h1 className="title login">로그아웃 하실래요?</h1>
 
         <button
-          class="btn logout"
+          className="btn logout"
           onClick={() => console.log("로그아웃 버튼입니다")}
         >
           로그아웃

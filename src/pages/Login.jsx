@@ -1,29 +1,52 @@
 import React from "react";
+import { useState } from "react";
 
 function Login() {
+  const [login, setLogin] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = (e) => {
+    setLogin(e.target.value);
+  };
+
+  const handlePassword = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    setLogin("");
+    setPassword("");
+  };
+
   return (
-    <main class="wrapper">
-      <div class="container">
-        <h1 class="title login">로그인 하기</h1>
+    <main className="wrapper">
+      <form className="container" onSubmit={handleSubmit}>
+        <h1 className="title login">로그인 하기</h1>
         <input
           type="text"
           id="account"
-          class="input-login"
+          className="input-login"
           placeholder="아이디를 입력해주세요"
+          value={login}
+          onChange={handleLogin}
         />
         <input
           type="password"
           id="password"
-          class="input-login"
+          className="input-login"
           placeholder="비밀번호를 입력해주세요"
+          value={password}
+          onChange={handlePassword}
         />
         <button
-          class="btn login"
+          className="btn login"
           onClick={() => console.log("로그인 버튼입니다")}
         >
           로그인
         </button>
-      </div>
+      </form>
     </main>
   );
 }
