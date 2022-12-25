@@ -40,11 +40,11 @@ export const AuthProvider = ({ children }) => {
   const userLoggedIn = !!userToken;
 
   const loginHandler = (token) => {
-    dispatchUserToken({ type: "LOGIN" });
+    dispatchUserToken({ type: "LOGIN", token });
   };
 
   const logoutHandler = () => {
-    dispatchUserToken();
+    dispatchUserToken({ type: "LOGOUT" });
   };
 
   const userValue = {
