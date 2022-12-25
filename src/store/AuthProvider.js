@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useReducer } from "react";
 
 const AuthContext = createContext({
   token: "",
@@ -7,21 +7,48 @@ const AuthContext = createContext({
   logout: () => {},
 });
 
-export const AuthProvider = ({ children }) => {
-  const [token, setToken] = useState(null);
+const defaultUser = {
+  token: "",
+  isLoggedIn: false,
+};
 
-  const userLoggedIn = !!token;
+const authReducer = (state, action) => {
+  if (action.type === "LOGIN") {
+    const updateToken = (token) => {
+      return token;
+    };
+    return {
+      token: updateToken,
+      isLoggedIn: true,
+    };
+  }
+
+  if (action.type === "LOGOUT") {
+    const deleteToken = "";
+    return {
+      token: deleteToken,
+      isLoggedIn: false,
+    };
+  }
+
+  return defaultUser;
+};
+
+export const AuthProvider = ({ children }) => {
+  const [userToken, dispatchUserToken] = useReducer(authReducer, defaultUser);
+
+  const userLoggedIn = !!userToken;
 
   const loginHandler = (token) => {
-    setToken();
+    dispatchUserToken({ type: "LOGIN" });
   };
 
   const logoutHandler = () => {
-    setToken(null);
+    dispatchUserToken();
   };
 
   const userValue = {
-    token,
+    token: userToken,
     isLoggedIn: userLoggedIn,
     login: loginHandler,
     logout: logoutHandler,
