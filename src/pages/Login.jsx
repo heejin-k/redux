@@ -1,12 +1,17 @@
-import React from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import AuthContext from "../context/AuthContext";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
-  const [login, setLogin] = useState("");
+  const { authState, loginHandler } = useContext(AuthContext);
+  const URL = "https://mandarin.api.weniv.co.kr/user/login";
+  const navigate = useNavigate();
+  const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = (e) => {
-    setLogin(e.target.value);
+  const handleId = (e) => {
+    setUserId(e.target.value);
   };
 
   const handlePassword = (e) => {
@@ -15,8 +20,22 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    setLogin("");
+    try {
+      const res = await axios.post(URL, {
+        headers: {
+          "content-type": "application/json",
+        },
+        user: {
+          email: userId,
+          password: password,
+        },
+      });
+      loginHandler(res.data.user);
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+    }
+    setUserId("");
     setPassword("");
   };
 
@@ -29,8 +48,8 @@ function Login() {
           id="account"
           className="input-login"
           placeholder="아이디를 입력해주세요"
-          value={login}
-          onChange={handleLogin}
+          value={userId}
+          onChange={handleId}
         />
         <input
           type="password"
@@ -40,10 +59,7 @@ function Login() {
           value={password}
           onChange={handlePassword}
         />
-        <button
-          className="btn login"
-          onClick={() => console.log("로그인 버튼입니다")}
-        >
+        <button type="submit" className="btn login">
           로그인
         </button>
       </form>

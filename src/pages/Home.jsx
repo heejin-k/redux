@@ -1,20 +1,27 @@
 import { useContext } from "react";
-import AuthContext from "../store/AuthProvider";
+import AuthContext from "../context/AuthContext";
 import { Link } from "react-router-dom";
 
 function Home() {
-  const ctx = useContext(AuthContext);
+  const { authState } = useContext(AuthContext);
+
   return (
     <main className="wrapper">
       <div className="container">
-        {/* 로그인 했을시 보이는 화면 */}
-        {!!ctx.isLoggedIn && <h1 className="title">환영합니다!</h1>}
-        {/* 로그인 하지 않았을시 보이는 화면 */}
-        {!ctx.isLoggedIn && <h2>로그인이 필요합니다.</h2>}
-        {!ctx.isLoggedIn && (
-          <Link to="/login" className="link-login">
-            로그인 하기!
-          </Link>
+        {authState.token ? (
+          <>
+            <h1 className="title">환영합니다! {authState.accountname}님</h1>
+            <Link to="/user" className="link-login">
+              프로필 보기
+            </Link>
+          </>
+        ) : (
+          <>
+            <h2 className="title">반갑습니다! 로그인 해주세요</h2>
+            <Link to="/login" className="link-login">
+              로그인 하기!
+            </Link>
+          </>
         )}
       </div>
     </main>

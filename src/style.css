@@ -156,6 +156,14 @@ body {
   color: lightseagreen;
 }
 
+.text-box {
+  margin-top: 40px;
+}
+.text {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 11px;
+}
 .input-login {
   width: 195px;
   height: 45px;

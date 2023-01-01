@@ -4,7 +4,7 @@ function NotFound() {
   return (
     <main className="wrapper">
       <div className="container">
-        <h1>Not Found!</h1>
+        <h1 className="title">Not Found!</h1>
       </div>
     </main>
   );

@@ -1,15 +1,19 @@
-import React from "react";
+import AuthContext from "../context/AuthContext";
+import { useContext } from "react";
 
 function Logout() {
+  const { logoutHandler } = useContext(AuthContext);
+
+  function logOut() {
+    logoutHandler();
+    window.location.reload();
+  }
   return (
     <main className="wrapper">
       <div className="container">
         <h1 className="title login">로그아웃 하실래요?</h1>
 
-        <button
-          className="btn logout"
-          onClick={() => console.log("로그아웃 버튼입니다")}
-        >
+        <button className="btn logout" onClick={logOut}>
           로그아웃
         </button>
       </div>
