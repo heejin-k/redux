@@ -10,7 +10,7 @@ function Home() {
       <div className="container">
         {authState.token ? (
           <>
-            <h1 className="title">환영합니다! {authState.accountname}님</h1>
+            <h1 className="title">환영합니다! {authState.username}님</h1>
             <Link to="/user" className="link-login">
               프로필 보기
             </Link>

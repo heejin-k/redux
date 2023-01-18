@@ -5,39 +5,17 @@ import axios from "axios";
 
 function UserInfo() {
   const { authState } = useContext(AuthContext);
-  const [userData, setUserData] = useState(authState);
-  const URL = "https://mandarin.api.weniv.co.kr/profile/";
-
-  useEffect(() => {
-    const values = Object.values(authState);
-    const isAuthValid = values.reduce((prev, cur) => {
-      return Boolean(prev && cur);
-    });
-    async function getUserData() {
-      try {
-        const res = await axios.get(URL + authState.accountname, {
-          headers: {
-            Authorization: `Bearer ${authState.token}`,
-            "Content-type": "application/json",
-          },
-        });
-        setUserData({ ...res.data.profile });
-      } catch (error) {
-        console.error(error);
-      }
-    }
-    /**context api에 데이터가 없을시 getUserData fetch */
-    !isAuthValid && getUserData();
-  }, []);
-
   return (
     <main className="wrapper">
       <div className="container">
         <h1 className="title">유저 정보 페이지입니다.</h1>
+        <img className="user-img" src={authState.image} />
         <div className="text-box">
-          <p className="text">아이디 : {userData.accountname}</p>
-          <p className="text">유저네임: {userData.username}</p>
-          <p className="text">소개 : {userData.intro}</p>
+          <p className="text">
+            이름 : {authState.firstName + " " + authState.lastName}
+          </p>
+          <p className="text">유저 닉네임: {authState.username}</p>
+          <p className="text">이메일 주소 : {authState.email}</p>
         </div>
         <Link to="/logout">로그아웃 하기</Link>
       </div>

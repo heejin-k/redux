@@ -4,8 +4,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
-  const { authState, loginHandler } = useContext(AuthContext);
-  const URL = "https://mandarin.api.weniv.co.kr/user/login";
+  const { loginHandler } = useContext(AuthContext);
+  const URL = "https://dummyjson.com/auth/login";
   const navigate = useNavigate();
   const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
@@ -23,14 +23,13 @@ function Login() {
     try {
       const res = await axios.post(URL, {
         headers: {
-          "content-type": "application/json",
+          "Content-type": "application/json",
         },
-        user: {
-          email: userId,
-          password: password,
-        },
+        username: userId,
+        password: password,
       });
-      loginHandler(res.data.user);
+      console.log(res);
+      loginHandler(res.data);
       navigate("/");
     } catch (error) {
       console.error(error);

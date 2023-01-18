@@ -2,19 +2,22 @@ import { createContext, useReducer } from "react";
 
 const AuthContext = createContext();
 const user = {
-  username: "",
-  accountname: localStorage.getItem("account"),
-  intro: "",
+  id: null,
+  username: null,
+  email: null,
+  firstName: null,
+  lastName: null,
+  gender: null,
+  image: null,
   token: localStorage.getItem("testToken"),
 };
 
 const authReducer = (state, action) => {
   switch (action.type) {
     case "login":
-      const { username, token, accountname, intro } = action.payload;
-      return { ...state, username, accountname, intro, token };
+      return { ...action.payload };
     case "logout":
-      return { ...state, token: null, accountname: null };
+      return { ...state, token: null };
     default:
       return state;
   }
@@ -25,13 +28,11 @@ export const AuthProvider = ({ children }) => {
 
   const loginHandler = (data) => {
     localStorage.setItem("testToken", data.token);
-    localStorage.setItem("account", data.accountname);
     dispatch({ type: "login", payload: data });
   };
 
   const logoutHandler = () => {
     localStorage.removeItem("testToken");
-    localStorage.removeItem("account");
     dispatch({ type: "logout" });
   };
 
