@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 export const userSlice = createSlice({
-  //user 정보의 초기 세팅값은 null로 설정
+  //초기 세팅값 null로 설정
   name: 'user',
   initialState:{
     id: null,
@@ -16,7 +16,7 @@ export const userSlice = createSlice({
   reducers: {
   	//reducer 중 login이 작동하면, 
     login: (state, action) => {
-      //전달받은 유저정보를 user에 담는다
+      //전달받은 유저정보를 해당하는 값에 저장
       state.id = action.payload.id;
       state.username = action.payload.username;
       state.email = action.payload.email;
@@ -29,15 +29,15 @@ export const userSlice = createSlice({
     //reducer 중 logout이 작동하면,
     logout: (state) => {
       //user 정보를 null로 바꾼다
-      state.user.token = null;
+      state.token = null;
     },
   },
 });
 
-//login, logout을 reducer의 작동유형으로 설정하고
+//login, logout을 reducer의 action으로 설정
 export const { login, logout } = userSlice.actions;
 
-//다른 컴포넌트들에서도 user정보를 가져다 데이터바인딩할 수 있게 selector도 설정한다
+//다른 컴포넌트들에서도 user정보를 가져다 쓸 수 있도록 selector 설정
 export const selectUser = (state) => state;
 export const selectUserToken = (state) => state.user.token;
 

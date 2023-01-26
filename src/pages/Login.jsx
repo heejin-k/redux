@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { useDispatch } from 'react-redux';
-// import AuthContext from "../context/AuthContext";
-import axios from "axios";
-import {login} from '../store/userSlice'
 import { useNavigate } from "react-router-dom";
+import {login} from '../store/userSlice'
+import axios from "axios";
 
 function Login() {
   // const { loginHandler } = useContext(AuthContext);

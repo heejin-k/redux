@@ -1,19 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from 'react-redux';
-import { selectUser } from "../store/userSlice";
+import { selectUser,selectUserToken } from "../store/userSlice";
 
 function Home() {
-  const authState = useSelector(selectUser)
-  console.log('authstate',authState)
-  // const { authState } = useContext(AuthContext);
-
+  const user = useSelector(selectUser)
+  const token = useSelector(selectUserToken)
+  
   return (
     <main className="wrapper">
       <div className="container">
-        {authState.token ? (
+        {token ? (
           <>
-            <h1 className="title">환영합니다! {authState.username}님</h1>
+            <h1 className="title">환영합니다! {user.username}님</h1>
             <Link to="/user" className="link-login">
               프로필 보기
             </Link>
