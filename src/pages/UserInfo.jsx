@@ -1,9 +1,10 @@
-import { useContext } from "react";
-import AuthContext from "../context/AuthContext";
 import { Link } from "react-router-dom";
+import { useSelector } from 'react-redux';
+import { selectUser } from "../store/userSlice";
 
 function UserInfo() {
-  const { authState } = useContext(AuthContext);
+  const { authState } = useSelector(selectUser);
+  console.log('g',authState)
   return (
     <main className="wrapper">
       <div className="container">

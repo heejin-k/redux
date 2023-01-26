@@ -1,9 +1,12 @@
-import { useContext } from "react";
-import AuthContext from "../context/AuthContext";
+import React from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from 'react-redux';
+import { selectUser } from "../store/userSlice";
 
 function Home() {
-  const { authState } = useContext(AuthContext);
+  const authState = useSelector(selectUser)
+  console.log('authstate',authState)
+  // const { authState } = useContext(AuthContext);
 
   return (
     <main className="wrapper">

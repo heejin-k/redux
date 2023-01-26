@@ -1,12 +1,13 @@
-import AuthContext from "../context/AuthContext";
-import { useContext } from "react";
+import React from "react";
+import selectUser from '../store/userSlice'
 
 function Logout() {
-  const { logoutHandler } = useContext(AuthContext);
+  // const { logoutHandler } = useContext(AuthContext);
 
   function logOut() {
-    logoutHandler();
-    window.location.reload();
+    localStorage.removeItem("testToken");
+    // logoutHandler();
+    // window.location.reload();
   }
   return (
     <main className="wrapper">

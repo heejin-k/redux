@@ -1,20 +1,30 @@
-import { useState, useContext } from "react";
-import AuthContext from "../context/AuthContext";
+import { useState } from "react";
+import { useDispatch } from 'react-redux';
+// import AuthContext from "../context/AuthContext";
 import axios from "axios";
+import {login} from '../store/userSlice'
 import { useNavigate } from "react-router-dom";
 
 function Login() {
-  const { loginHandler } = useContext(AuthContext);
+  // const { loginHandler } = useContext(AuthContext);
   const URL = "https://dummyjson.com/auth/login";
   const navigate = useNavigate();
   const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
 
+  const dispatch = useDispatch();
+
+  // const setLocalToken = () =>{
+  //   localStorage.setItem("testToken", action.payload.token);
+  // }
+
   const handleId = (e) => {
+    //아이디 input에 변경이 있을 때 userId에 저장
     setUserId(e.target.value);
   };
 
   const handlePassword = (e) => {
+    //비밀번호 input에 변경이 있을 떄 password 변경
     setPassword(e.target.value);
   };
 
@@ -28,8 +38,12 @@ function Login() {
         username: userId,
         password: password,
       });
-      console.log(res);
-      loginHandler(res.data);
+      console.log('res.data',res.data);
+      dispatch(
+        login(res.data)
+        //로그인 리듀서에 전달받은 정보들 저장
+      )
+      localStorage.setItem("testToken", res.data.token);
       navigate("/");
     } catch (error) {
       console.error(error);
