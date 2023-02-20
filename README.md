@@ -1,6 +1,4 @@
-# handle-context-api
+#  redux-toolkit
 
-## 리액트 상태관리 패키지 - ContextAPI
+## 리액트 상태관리 패키지 - redux-toolkit
 
-<보너스 : 이렇게 친절할수가!! > - 로그인 로그아웃을 전역에서 관리해보자  
-집필자 : 박소현, 이시현
